@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/constraint"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/coordLay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/popularItemFragment"
-    tools:context=".presentation.PopularItemFragment">
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    >
 
-    <ImageView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/popItemImg"></ImageView>
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-</FrameLayout>
+        <LinearLayout
+            android:id="@+id/contain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="30dp">
+
+            <TextView
+                android:id="@+id/itemNameTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/itemDescrTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textSize="14sp"
+                android:textColor="@color/genreGrey"
+                android:fontFamily="@font/roboto_bold"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/itemGenreTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textSize="14sp"
+                android:textColor="@color/genreGrey"
+                android:fontFamily="@font/roboto_bold"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/itemCountryTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="14sp"
+                android:textColor="@color/genreGrey"
+                ></TextView>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+
+            android:id="@+id/colTool"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/black"
+            android:background="@color/black"
+            app:expandedTitleGravity="top"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:scrimAnimationDuration="300">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/popItemImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitStart"
+                    android:textAlignment="center"
+                    android:tintMode="src_over"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.4"
+                    ></com.google.android.material.imageview.ShapeableImageView>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

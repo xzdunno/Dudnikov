@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dudnikov.PopularAdapter
 import com.example.dudnikov.R
 import com.example.dudnikov.data.model.Top100Data
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PopularFragment : Fragment() {
     lateinit var recViewPopAdapter: PopularAdapter
     companion object {
@@ -33,7 +35,6 @@ class PopularFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(PopularViewModel::class.java)
         val recView = view.findViewById<RecyclerView>(R.id.recView)
         recView.apply {
             layoutManager = LinearLayoutManager(

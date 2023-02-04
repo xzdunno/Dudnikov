@@ -35,7 +35,7 @@ class PopularAdapter(/*val all: MainActivity.all*/) : RecyclerView.Adapter<Custo
         holder.bind(cur)
         holder.itemView.setOnClickListener {
             val bundle= bundleOf(
-                "film" to Film(cur.nameRu,cur.posterUrl,cur.posterUrlPreview,cur.genres,cur.year)
+                "film" to Film(cur.filmId,cur.nameRu,cur.posterUrl,cur.posterUrlPreview,cur.genres,cur.year,cur.countries)
             )
 it.findNavController().navigate(R.id.popularItemFragment, bundle)
 
