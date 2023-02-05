@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dudnikov.data.model.Film
 import com.squareup.picasso.Picasso
 
-class PopularAdapter(/*val all: MainActivity.all*/) : RecyclerView.Adapter<CustomViewHolder>() {
+class PopularAdapter() : RecyclerView.Adapter<CustomViewHolder>() {
     private var listData: List<Film>? = null
     fun setListData(listData: List<Film>?) {
         this.listData = listData
