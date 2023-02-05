@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/popularFragment"
-        android:name="com.example.dudnikov.presentation.PopularFragment"
+        android:name="com.example.dudnikov.presentation.fragment.PopularFragment"
         android:label="fragment_popular"
         tools:layout="@layout/fragment_popular" >
         <action
@@ -15,11 +15,30 @@
             app:destination="@id/popularItemFragment" />
         <argument android:name="year"
             app:argType="integer"></argument>
+        <action
+            android:id="@+id/action_popularFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/popularItemFragment"
-        android:name="com.example.dudnikov.presentation.PopularItemFragment"
-        android:label="fragment_popular_item"/>
+        android:name="com.example.dudnikov.presentation.fragment.PopularItemFragment"
+        android:label="fragment_popular_item">
+        <action
+            android:id="@+id/action_popularItemFragment_self"
+            app:destination="@id/popularItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.dudnikov.presentation.fragment.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_popularFragment"
+            app:destination="@id/popularFragment" />
+        <action
+            android:id="@+id/action_favouriteFragment_self"
+            app:destination="@id/favouriteFragment" />
+    </fragment>
 
 
 </navigation>

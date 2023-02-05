@@ -8,13 +8,28 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dudnikov.data.model.Description
 import com.example.dudnikov.data.model.Film
+import com.example.dudnikov.data.model.FilmFav
+import com.example.dudnikov.data.network.RetroInterface
+import com.example.dudnikov.domain.Repository
 import com.squareup.picasso.Picasso
+import javax.inject.Inject
 
-class PopularAdapter(/*val all: MainActivity.all*/) : RecyclerView.Adapter<CustomViewHolder>() {
+class PopularAdapter() : RecyclerView.Adapter<CustomViewHolder>() {
     private var listData: List<Film>? = null
+    private var checkFav: List<String>? = null
+    var myRecDataFav: MutableLiveData<Film> = MutableLiveData()
+    var myRecData: MutableLiveData<Film> = MutableLiveData()
+    var starId: MutableLiveData<String> = MutableLiveData()
+    fun setCheckFav(str: List<String>?) {
+        checkFav = str
+    }
+
     fun setListData(listData: List<Film>?) {
         this.listData = listData
     }
@@ -31,30 +46,39 @@ class PopularAdapter(/*val all: MainActivity.all*/) : RecyclerView.Adapter<Custo
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val cur=listData?.get(position)!!
-        holder.bind(cur)
+        val cur = listData?.get(position)!!
+        holder.bind(cur, checkFav)
         holder.itemView.setOnClickListener {
-            val bundle= bundleOf(
-                "film" to Film(cur.filmId,cur.nameRu,cur.posterUrl,cur.posterUrlPreview,cur.genres,cur.year,cur.countries)
-            )
-it.findNavController().navigate(R.id.popularItemFragment, bundle)
-
+            myRecData.value = cur
+        }
+        holder.itemView.setOnLongClickListener {
+            if (holder.star.visibility == View.GONE)
+                myRecDataFav.value = cur
+            else {
+                starId.value = cur.filmId
+                holder.star.visibility = View.GONE
+            }
+            true
         }
     }
 }
 
 class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-val imgView=view.findViewById<ImageView>(R.id.imageView)
-val nameTxt=view.findViewById<TextView>(R.id.nameTxt)
-    val genreTxt=view.findViewById<TextView>(R.id.genreTxt)
-    fun bind(film: Film) {
+    val imgView = view.findViewById<ImageView>(R.id.imageView)
+    val nameTxt = view.findViewById<TextView>(R.id.nameTxt)
+    val genreTxt = view.findViewById<TextView>(R.id.genreTxt)
+    val star = view.findViewById<ImageView>(R.id.star)
+    fun bind(film: Film, check: List<String>?) {
         nameTxt.setEllipsize(TextUtils.TruncateAt.END)
-nameTxt.text=film.nameRu
-        if (film.nameRu.length>20) nameTxt.text=film.nameRu.substring(0,20)+"..."//ellipsize не работает
-        else nameTxt.text=film.nameRu
-        genreTxt.text= film.genres[0].genre+"(${film.year})"
+        nameTxt.text = film.nameRu
+        if (film.nameRu.length > 20) nameTxt.text =
+            film.nameRu.substring(0, 20) + "..."//ellipsize не работает
+        else nameTxt.text = film.nameRu
+        genreTxt.text = film.genres[0].genre + "(${film.year})"
         Picasso.get().load(film.posterUrlPreview)
             .into(imgView)
-
+        if (check != null) {
+            if (check.contains(film.filmId)) star.visibility = View.VISIBLE
+        }
     }
 }

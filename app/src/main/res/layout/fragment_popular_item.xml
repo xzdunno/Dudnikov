@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/constraint"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-    tools:context=".presentation.PopularItemFragment">
+    tools:context=".presentation.fragment.PopularItemFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -143,7 +143,18 @@ android:layout_height="match_parent"
                     app:layout_collapseParallaxMultiplier="0.4"
                     ></com.google.android.material.imageview.ShapeableImageView>
 
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backBtn"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"></ImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>
